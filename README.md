@@ -1,3 +1,4 @@
+```markdown
 # HCM-CELLM ☁️⚡
 
 **A Cloud-Edge Collaborative Large Language Model Inference Framework Based on Historical Context Matching**
@@ -12,12 +13,59 @@ Deploying Large Language Models (LLMs) faces challenges like high inference late
 
 ## 📂 Dataset
 For reproducibility, we provide the exact 100-query inference subset randomly sampled from the **MultiWOZ 2.2** dataset used in our simulations. 
-- Location: `data/test_queries_100.json` (or `.parquet`)
-- This dataset is utilized to test the matching efficacy and the PPO agent's convergence.
+* Location: `data/test_queries_100.json` (or `.parquet`)
+* This dataset is utilized to test the matching efficacy and the PPO agent's convergence.
 
 ## ⚙️ Environment Setup
 
 **1. Clone the repository:**
 ```bash
-git clone [https://github.com/](https://github.com/)[Your-Username]/HCM-CELLM.git
+git clone https://github.com/[Your-Username]/HCM-CELLM.git
 cd HCM-CELLM
+
+```
+
+**2. Install dependencies:**
+
+```bash
+pip install -r requirements.txt
+
+```
+
+*(Main dependencies include: `torch`, `transformers`, `chromadb`, `openai`, `bert_score`, `keybert`, `pandas`)*
+
+**3. Prepare Local Models:**
+Download the `all-mpnet-base-v2` embedding model from HuggingFace and place it in the `local_models/` directory. Update the path in `src/config.py` if necessary.
+
+**4. Configure API Keys:**
+The simulation uses third-party APIs for LLM generation. Set your environment variables before running:
+
+```bash
+export ARK_API_KEY="your_volcengine_ark_api_key_here"
+# Note: Update edge model API keys in src/init_LLM.py
+
+```
+
+## 🚀 Quick Start (Demo)
+
+To replicate the PPO training and edge-cloud collaborative scheduling experiment on the sample dataset, simply run:
+
+```bash
+python run_demo.py
+
+```
+
+This script will initialize the ChromaDB vector database, load the sample MultiWOZ queries, and execute the PPOAgent training loop. The output metrics (latency, energy, accuracy) will be logged to the console and saved in local JSON files.
+
+## 📊 Important Notes on Reproducibility
+
+As discussed in the manuscript:
+
+* **API Volatility**: Real-world API calls introduce network latency and throttling. We utilize a Moving Average mechanism to evaluate long-term trends.
+* **Theoretical Latency**: The absolute latency metrics outputted by this simulation (e.g., ~24s) are theoretical values calculated based on our assumed edge/cloud mathematical capacity models (, ). The core algorithmic contribution is the relative latency reduction (~10.07%) driven by FLOPs savings.
+
+## 📝 Citation
+
+*(To be updated upon publication)*
+
+```
