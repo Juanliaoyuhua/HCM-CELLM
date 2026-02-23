@@ -46,17 +46,6 @@ export ARK_API_KEY="your_volcengine_ark_api_key_here"
 
 ```
 
-## 🚀 Quick Start (Demo)
-
-To replicate the PPO training and edge-cloud collaborative scheduling experiment on the sample dataset, simply run:
-
-```bash
-python run_demo.py
-
-```
-
-This script will initialize the ChromaDB vector database, load the sample MultiWOZ queries, and execute the PPOAgent training loop. The output metrics (latency, energy, accuracy) will be logged to the console and saved in local JSON files.
-
 ## 📊 Important Notes on Reproducibility
 
 As discussed in the manuscript:
